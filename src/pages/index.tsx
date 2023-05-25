@@ -5,25 +5,21 @@ import { useState } from "react";
 function Profile() {
   return (
     <div>
-    <img
-      src="https://i.imgur.com/MK3eW3As.jpg"
-      alt="Katherine Johnson"
-    />
+      <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
     </div>
-  )
+  );
 }
 
 function formatDate(date: Date) {
-  return new Intl.DateTimeFormat(
-    'en-US',
-    { weekday: 'long' }
-  ).format(date);
+  return new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date);
 }
 
 function Gallery() {
   return (
     <section>
-      <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">Amazing scientist {formatDate(new Date())}</h1>
+      <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
+        Amazing scientist {formatDate(new Date())}
+      </h1>
       <Profile />
       <Profile />
       <Profile />
@@ -31,43 +27,50 @@ function Gallery() {
   );
 }
 
-function killowatthours_per_year(watt:number) {
-  let hours_per_year = 24*365;
-  return watt * hours_per_year / 1000.
+function killowatthours_per_year(watt: number) {
+  let hours_per_year = 24 * 365;
+  return (watt * hours_per_year) / 1000;
   //return watt * (hours_per_year) / 1000.
 }
 
-function Wattbar({wattText, onWattChange}) {
+function Wattbar({ wattText, onWattChange }) {
   return (
     <form>
-      <input type="text" value={wattText} placeholder="100" onChange={(e) => onWattChange(e.target.value)} />
+      <input
+        type="text"
+        value={wattText}
+        placeholder="100"
+        onChange={(e) => onWattChange(e.target.value)}
+      />
     </form>
-  )
+  );
 }
 
-function WattResult({ watt  } ) {
+function WattResult({ watt }) {
   return (
     <h1 className="text-white"> kWh = {killowatthours_per_year(watt)} </h1>
-  )
+  );
 }
-function PriceResult({ watt  } ) {
-  let price = .5
+function PriceResult({ watt }) {
+  let price = 0.5;
   return (
-    <h1 className="text-white"> price = {killowatthours_per_year(watt) * price} </h1>
-  )
+    <h1 className="text-white">
+      {" "}
+      price = {killowatthours_per_year(watt) * price}{" "}
+    </h1>
+  );
 }
 
 function All() {
   const [wattText, setWattText] = useState("");
   return (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Wattbar wattText={wattText} onWattChange={setWattText} />
-            <WattResult watt={+wattText}/>
-            <PriceResult watt={+wattText}/>
-          </div>
-  )
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
+      <Wattbar wattText={wattText} onWattChange={setWattText} />
+      <WattResult watt={+wattText} />
+      <PriceResult watt={+wattText} />
+    </div>
+  );
 }
-
 
 const Home: NextPage = () => {
   return (
