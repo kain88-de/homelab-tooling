@@ -5,21 +5,25 @@ import { useState } from "react";
 function Profile() {
   return (
     <div>
-      <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
+      <img
+        src="https://i.imgur.com/MK3eW3As.jpg"
+        alt="Katherine Johnson"
+      />
     </div>
-  );
+  )
 }
 
 function formatDate(date: Date) {
-  return new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date);
+  return new Intl.DateTimeFormat(
+    'en-US',
+    { weekday: 'long' }
+  ).format(date);
 }
 
 function Gallery() {
   return (
     <section>
-      <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-        Amazing scientist {formatDate(new Date())}
-      </h1>
+      <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">Amazing scientist {formatDate(new Date())}</h1>
       <Profile />
       <Profile />
       <Profile />
@@ -29,36 +33,37 @@ function Gallery() {
 
 function killowatthours_per_year(watt: number) {
   let hours_per_year = 24 * 365;
-  return (watt * hours_per_year) / 1000;
+  return watt * hours_per_year / 1000.
   //return watt * (hours_per_year) / 1000.
 }
 
-function Wattbar({ wattText, onWattChange }) {
-  return (
-    <form>
-      <input
-        type="text"
-        value={wattText}
-        placeholder="100"
-        onChange={(e) => onWattChange(e.target.value)}
-      />
-    </form>
-  );
+interface WattbarProps {
+  wattText: string;
+  onWattChange: (value: string) => void;
 }
 
-function WattResult({ watt }) {
+function Wattbar(prop: WattbarProps) {
   return (
-    <h1 className="text-white"> kWh = {killowatthours_per_year(watt)} </h1>
-  );
+    <form>
+      <input type="text" value={prop.wattText} placeholder="100" onChange={(e) => prop.onWattChange(e.target.value)} />
+    </form>
+  )
 }
-function PriceResult({ watt }) {
-  let price = 0.5;
+
+interface WattProp {
+  watt: number
+}
+
+function WattResult(prop: WattProp) {
   return (
-    <h1 className="text-white">
-      {" "}
-      price = {killowatthours_per_year(watt) * price}{" "}
-    </h1>
-  );
+    <h1 className="text-white"> kWh = {killowatthours_per_year(prop.watt)} </h1>
+  )
+}
+function PriceResult(prop: WattProp) {
+  let price = .5
+  return (
+    <h1 className="text-white"> price = {killowatthours_per_year(prop.watt) * price} </h1>
+  )
 }
 
 function All() {
@@ -69,8 +74,9 @@ function All() {
       <WattResult watt={+wattText} />
       <PriceResult watt={+wattText} />
     </div>
-  );
+  )
 }
+
 
 const Home: NextPage = () => {
   return (
