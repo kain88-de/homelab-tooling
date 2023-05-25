@@ -2,34 +2,6 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 
-function Profile() {
-  return (
-    <div>
-      <img
-        src="https://i.imgur.com/MK3eW3As.jpg"
-        alt="Katherine Johnson"
-      />
-    </div>
-  )
-}
-
-function formatDate(date: Date) {
-  return new Intl.DateTimeFormat(
-    'en-US',
-    { weekday: 'long' }
-  ).format(date);
-}
-
-function Gallery() {
-  return (
-    <section>
-      <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">Amazing scientist {formatDate(new Date())}</h1>
-      <Profile />
-      <Profile />
-      <Profile />
-    </section>
-  );
-}
 
 function killowatthours_per_year(watt: number) {
   let hours_per_year = 24 * 365;
