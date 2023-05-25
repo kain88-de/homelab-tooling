@@ -4,8 +4,8 @@ import { useState } from "react";
 
 
 function killowatthours_per_year(watt: number) {
-  let hours_per_year = 24 * 365;
-  return watt * hours_per_year / 1000.
+  const hours_per_year: number = 24.0 * 365.0;
+  return watt * hours_per_year / 1000.0
   //return watt * (hours_per_year) / 1000.
 }
 
@@ -32,7 +32,7 @@ function WattResult(prop: WattProp) {
   )
 }
 function PriceResult(prop: WattProp) {
-  let price = .5
+  const price = .5
   return (
     <h1 className="text-white"> price = {killowatthours_per_year(prop.watt) * price} </h1>
   )
